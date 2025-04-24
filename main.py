@@ -28,7 +28,7 @@ def webhook():
     try:
         data = request.get_json(force=True)
         update = Update.de_json(data, application.bot)
-        application.update_queue.put(update)
+        application.update_queue.put_nowait(update)
     except Exception as e:
         logging.error(f"❌ Webhook Error: {e}")
     return "ok"
